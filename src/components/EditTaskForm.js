@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link} from "react-router-dom";
+import {Link , Redirect} from "react-router-dom";
 const EditTaskForm = props => {
     const [task, setTask] = useState(props.currentTask);
 
@@ -7,15 +7,21 @@ const EditTaskForm = props => {
         const { name, value } = event.target
         setTask({ ...task, [name]: value });
     };
-
+    if(props.currentTask.description===""){
+        return <Redirect to="/"></Redirect>
+    }
     return (
-        <form>
-            <label>Title</label>
-            <input type="text" name="title" value={task.title} onChange={handleInputChange} ></input>
-            <label>Description</label>
-            <input type="text" name="description" value={task.description} onChange={handleInputChange} ></input>
+        <form className={"form-check"}>
+            <label className= "form-check-label">Title</label>
+            <input className= "form-control w-25" type="text" name="title" value={task.title} onChange={handleInputChange} ></input>
+            <label className= "form-check-label">Description</label>
+            <input className= "form-control w-25" type="text" name="description" value={task.description} onChange={handleInputChange} ></input>
+            <label className= "form-check-label">Priority</label>
+            <input className= "form-control w-25" type="number" name="priority" value={task.priority} onChange={handleInputChange} ></input>
+            <label className= "form-check-label">Due Date</label>
+            <input className= "form-control w-25" type="date" name="dueDate" value={task.dueDate} onChange={handleInputChange} ></input>
             <Link to ="/"><button onClick={()=> {
-                if (!task.title || !task.description) return;
+                if (!task.title || !task.description|| !task.dueDate|| !task.priority) return;
                 props.updateTask(task)
             }}>Update Task</button></Link>
             <Link to ="/"><button>Cancel</button></Link>

@@ -10,12 +10,16 @@ const NewTaskForm = props => {
 
     return (
         <form >
-            <label>Title</label>
-            <input type="text" name="title" value={task.title} onChange={handleInputChange} ></input>
-            <label>Description</label>
-            <input type="text" name="description" value={task.position} onChange={handleInputChange} ></input>
-            <Link to ="/"><button onClick={()=> {
-                if (!task.title || !task.description) return;
+            <label className= "form-check-label">Title</label>
+            <input className= "form-control w-25" type="text" name="title" value={task.title} onChange={handleInputChange} ></input>
+            <label className= "form-check-label">Description</label>
+            <input className= "form-control w-25" type="text" name="description" value={task.position} onChange={handleInputChange} ></input>
+            <label className= "form-check-label">Priority</label>
+            <input className= "form-control w-25" type="number" name="priority" value={task.priority} onChange={handleInputChange} ></input>
+            <label className= "form-check-label">Due Date</label>
+            <input className= "form-control w-25" type="date" name="dueDate" value={task.dueDate} onChange={handleInputChange} ></input>
+            <Link to ="/"> <button onClick={()=> {
+                if (!task.title || !task.description|| !task.dueDate|| !task.priority) return;
                 props.addTask(task)
             }}>Create Task</button></Link>
             <Link to ="/"><button>Cancel</button></Link>
