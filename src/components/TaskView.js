@@ -24,7 +24,7 @@ const TaskView = props => {
                 <dd className="col-sm-9"><input type="checkbox" disabled></input></dd>
                 }
             </dl>
-            <Link to="/"><button>Back</button></Link>
+            <Link to="/"><button className={"btn btn-danger mt-2 w-25"}>Back</button></Link>
             </div>
     )
 

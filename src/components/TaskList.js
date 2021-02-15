@@ -64,7 +64,10 @@ const TaskList = props => {
                 done: false,
                 checked:false
             }])))
-            .catch( error => console.log(error))
+            .catch( error => {
+                alert("Wrong form format try again");
+                console.log(error)
+            })
     };
 
     const removeTask = id => {
@@ -155,9 +158,15 @@ const TaskList = props => {
                     dueDate: updatedTask.dueDate,
                     done: updatedTask.done
                 }
-             } ) ).then ( res =>console.log(res) )
+             } ) ).then ( res =>{
+                 console.log(res);
+                setTasks(tasks.map(task => (task.id === updatedTask.id ? updatedTask : task)))
+             })
+            .catch(()=>{
+                alert("Wrong form format try again");
+            })
 
-        setTasks(tasks.map(task => (task.id === updatedTask.id ? updatedTask : task)))
+
     };
     const batchDelete=()=>{
         tasks.forEach(task=>{
@@ -192,46 +201,58 @@ const TaskList = props => {
                     <TaskView currentTask={currentTask} />
                 </Route>
                 <Route path="/">
-                    {console.log(tasks)}
                     <div className="tasksList">
                         <h3>Tasks to do:</h3>
+
                         {tasks.map((task) => (
                             !task.done&&
-                            <div key={task.id}>
-                                <Task  task={task} removeTask={removeTask} editTask={editTask} onChangeCheckBoxHandle={onChangeCheckBoxHandle}/>
-                                <button  onClick={ () => {
+                            <dl className="row" key={task.id}>
+                                <dt className="col-sm-3 mb-2 mt-1">
+                                    <h4>
+                                        <Task  task={task} removeTask={removeTask} editTask={editTask} onChangeCheckBoxHandle={onChangeCheckBoxHandle}/>
+                                    </h4>
+                                </dt>
+                                <dd className="col-sm-3 mb-2 mt-1">
+                                <button className={"btn btn-info"} onClick={ () => {
                                     completeTask( task )
                                 }}>Complete</button>
-                            </div>
+                                </dd>
+                            </dl>
                             ))}
                     </div>
                     <div className="tasksList">
                         <h3>Completed tasks:</h3>
                         {tasks.map((task) => (
                             task.done&&
-                            <div key={task.id}>
-                                <Task task={task} removeTask={removeTask} editTask={editTask} onChangeCheckBoxHandle={onChangeCheckBoxHandle} />
-                                <button  onClick={ () => {
+                            <dl className="row" key={task.id}>
+                                <dt className="col-sm-3 mb-2 mt-1">
+                                    <h4>
+                                        <Task task={task} removeTask={removeTask} editTask={editTask} onChangeCheckBoxHandle={onChangeCheckBoxHandle} />
+                                    </h4>
+                                </dt>
+                                <dd className="col-sm-3 mb-2 mt-1">
+                                <button className={"btn btn-info"} onClick={ () => {
                                     makeActiveTask( task )
                                 }}>Make Active</button>
-                            </div>
+                                </dd>
+                            </dl>
                         ))}
                     </div>
                     <div>
-                        <Link to="/new"><button>Add new task</button></Link>
-                        <button onClick={ () => {
+                        <Link to="/new"><button className={"btn btn-info mt-2 mr-2  w-25"}>Add new task</button></Link>
+                        <button className="btn btn-danger mt-2 w-25" onClick={ () => {
                             batchDelete()
                         }}>Batch delete</button>
                     </div>
                     <div>
-                        <button onClick={ () => {
+                        <button className="btn btn-success mt-2 mr-2 w-25" onClick={ () => {
                             checkAll()
                         }}>Check all</button>
-                        <button onClick={ () => {
+                        <button className="btn btn-success mt-2 mr-2 w-25" onClick={ () => {
                             unCheckAll()
                         }}>Uncheck all</button>
                     </div>
-                    <button onClick={ () => {
+                    <button className="btn btn-info mt-2 ml-1 w-50" onClick={ () => {
                         sortTasks()
                     }}>Sort all</button>
 
