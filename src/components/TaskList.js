@@ -1,4 +1,4 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import NewTaskForm from "./NewTaskForm";
 import Task from "./Task";
@@ -9,7 +9,6 @@ import {
     Route,
     Link
 } from "react-router-dom";
-import {Redirect} from 'react-router-dom'
 import TaskView from "./TaskView";
 import Login from "./Login.js"
 import SignUp from "./SignUp";
@@ -28,7 +27,7 @@ const TaskList = props => {
     };
     const [currentTask, setCurrentTask] = useState(initialFormState);
     const [tasks, setTasks] = useState([]);
-    const [sorted, setSorted] = useState(false);
+    const setSorted = useState(false)[1];
     const [loggedIn, setLoggedIn] = useState(false);
     const [token, setToken] = useState('');
 
