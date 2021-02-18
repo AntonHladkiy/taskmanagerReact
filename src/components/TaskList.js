@@ -244,7 +244,7 @@ const TaskList = props => {
     return (
     <Router>
         <div><NavBarAuth loggedIn={loggedIn} logOut={logOut}/></div>
-        <div className={"container"}>
+        <div  className={"ml-5"}>
             <Switch>
                 <Route path="/login">
                     <Login initialUser={initialUser} loggedIn={loggedIn} logIn={logIn} />
