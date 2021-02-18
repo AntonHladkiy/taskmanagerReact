@@ -23,7 +23,9 @@ const TaskList = props => {
     };
     const initialUser = {
         email:'',
-        password:''
+        password:'',
+        lastName:'',
+        firstName:''
     };
     const [currentTask, setCurrentTask] = useState(initialFormState);
     const [tasks, setTasks] = useState([]);
@@ -71,7 +73,9 @@ const TaskList = props => {
     const signUp=(user)=>{
         axios.post('https://arcane-reaches-18869.herokuapp.com/api/v1/users',{
             email:user.email,
-            password:user.password
+            password:user.password,
+            firstName:user.firstName,
+            lastName:user.lastName
         })
             .then(res => {
                     //setTasks ( res.data )

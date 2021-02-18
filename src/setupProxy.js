@@ -3,7 +3,7 @@ module.exports = function(app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'https://arcane-reaches-18869.herokuapp.com',
+            target: 'http://localhost:3001',
             changeOrigin: true,
         })
     );
