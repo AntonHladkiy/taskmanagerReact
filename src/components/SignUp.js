@@ -13,7 +13,7 @@ const SignUp = props => {
             <label className= "form-check-label">Email</label>
             <input className= "form-control w-25" type="text" name="email" value={user.email} onChange={handleInputChange} ></input>
             <label className= "form-check-label">Password</label>
-            <input className= "form-control w-25" type="text" name="password" value={user.password} onChange={handleInputChange} ></input>
+            <input className= "form-control w-25" type="text" name="password" type="password" value={user.password} onChange={handleInputChange} ></input>
             <Link to ="/login"> <button className="btn btn-warning mt-2 mr-2" onClick={()=> {
                 if (!user.email|| !user.password) return;
                 props.signUp(user)
