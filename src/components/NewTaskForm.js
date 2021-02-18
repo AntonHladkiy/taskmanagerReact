@@ -9,7 +9,7 @@ const NewTaskForm = props => {
     };
 
     return (
-        <form >
+        <form className={"form-check"} autocomplete="off">
             <label className= "form-check-label">Title</label>
             <input className= "form-control w-25" type="text" name="title" value={task.title} onChange={handleInputChange} ></input>
             <label className= "form-check-label">Description</label>

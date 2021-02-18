@@ -9,7 +9,7 @@ const SignUp = props => {
     };
 
     return (
-        <form >
+        <form autocomplete="off">
             <label className= "form-check-label">Email</label>
             <input className= "form-control w-25" type="text" name="email" value={user.email} onChange={handleInputChange} ></input>
             <label className= "form-check-label">Password</label>
