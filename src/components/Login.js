@@ -11,7 +11,7 @@ const Login = props => {
         return <Redirect to="/"></Redirect>
     }
     return (
-        <form className={"form-check"} autocomplete="off">
+        <form className={"form-check"} autoComplete="off">
             <label className= "form-check-label">Email</label>
             <input className= "form-control w-25" type="text" name="email" value={user.email} onChange={handleInputChange} ></input>
             <label className= "form-check-label">Password</label>
@@ -20,7 +20,8 @@ const Login = props => {
                 if (!user.email|| !user.password) return;
                 props.logIn(user)
             }}>Log In</button></Link>
-            <Link to ="/"><button className={"btn btn-danger mt-2"}>Cancel</button></Link>
+            <Link to ="/"><button  className={"btn btn-danger mt-2"}>Cancel</button></Link>
+            <div><Link to ="/signup"><button  className={"btn btn-info mt-2 w-25"}>Sign Up</button></Link></div>
         </form>
     )
 }

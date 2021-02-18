@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState,useEffect} from 'react';
 import axios from 'axios';
 import NewTaskForm from "./NewTaskForm";
 import Task from "./Task";
@@ -15,12 +15,6 @@ import Login from "./Login.js"
 import SignUp from "./SignUp";
 import NavBarAuth from "./NavBarAuth";
 const TaskList = props => {
-    useEffect(()=>{
-        if(props.token!==''){
-            setToken(props.token)
-            loadTasks(props.token)
-        }
-    })
     const initialFormState = {
         title:'',
         description:'',
@@ -250,19 +244,19 @@ const TaskList = props => {
 
             <Switch>
                 <Route path="/login">
-                    <Login initialUser={initialUser} loggedIn={loggedIn} logIn={logIn}/>
+                    <Login initialUser={initialUser} loggedIn={loggedIn} logIn={logIn} />
                 </Route>
                 <Route path="/signup">
-                    <SignUp initialUser={initialUser} signUp={signUp}/>
+                    <SignUp initialUser={initialUser} signUp={signUp} />
                 </Route>
                 <Route path="/new">
                     <NewTaskForm addTask={addTask} initialFormState={initialFormState}/>
                 </Route>
                 <Route path="/edit">
-                    <EditTaskForm currentTask={currentTask} token={token} updateTask={updateTask}/>
+                    <EditTaskForm currentTask={currentTask} updateTask={updateTask}/>
                 </Route>
                 <Route path="/view" >
-                    <TaskView currentTask={currentTask} token={token}/>
+                    <TaskView currentTask={currentTask}/>
                 </Route>
                 <Route path="/">
                     {loggedIn && <span>
@@ -321,15 +315,17 @@ const TaskList = props => {
                         <button className="btn btn-success mt-2 mr-2 w-25" onClick={() => {
                             unCheckAll()
                         }}>Uncheck all</button>
-                    </div>
+                    </div><div>
                     <button className="btn btn-info mt-2 ml-1 w-50" onClick={() => {
                         sortTasks()
-                    }}>Sort all</button>
+                    }}>Sort all</button></div>
                     </span>}
-                    {!loggedIn&&<h3>Log in first</h3>}
+                    {!loggedIn&&
+                    <span><h3>Log in first</h3>
+                    </span>}
+                    <div><NavBarAuth loggedIn={loggedIn} logOut={logOut}/></div>
                 </Route>
             </Switch>
-            <div><NavBarAuth loggedIn={loggedIn} logOut={logOut}/></div>
         </div>
     </Router>
     )

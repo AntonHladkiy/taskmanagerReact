@@ -8,10 +8,10 @@ const EditTaskForm = props => {
         setTask({ ...task, [name]: value });
     };
     if(props.currentTask.description===""){
-        return <Redirect to="/" token={props.token}></Redirect>
+        return <Redirect to="/"/>
     }
     return (
-        <form className={"form-check"} autocomplete="off">
+        <form className={"form-check"} autoComplete="off">
             <label className= "form-check-label">Title</label>
             <input className= "form-control w-25" type="text" name="title" value={task.title} onChange={handleInputChange} ></input>
             <label className= "form-check-label">Description</label>
