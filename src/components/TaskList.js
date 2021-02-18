@@ -34,7 +34,7 @@ const TaskList = props => {
     const [token, setToken] = useState('');
 
     const loadTasks=(token)=>{
-        axios.get('/api/v1/tasks.json',{
+        axios.get('https://arcane-reaches-18869.herokuapp.com/api/v1/tasks.json',{
             headers: {
                 Authorization:token //the token is a variable which holds the token
             }})
@@ -54,7 +54,7 @@ const TaskList = props => {
             )
     }
     const logIn=(user)=>{
-        axios.post('/api/v1/auth',{
+        axios.post('https://arcane-reaches-18869.herokuapp.com/api/v1/auth',{
             email:user.email,
                 password:user.password
         })
@@ -71,7 +71,7 @@ const TaskList = props => {
             ).catch(error=>console.log(error))
     }
     const signUp=(user)=>{
-        axios.post('/api/v1/users',{
+        axios.post('https://arcane-reaches-18869.herokuapp.com/api/v1/users',{
             email:user.email,
             password:user.password
         })
@@ -88,7 +88,7 @@ const TaskList = props => {
 
     const addTask = task => {
         const qs = require('qs');
-        axios.post('/api/v1/tasks', qs.stringify(
+        axios.post('https://arcane-reaches-18869.herokuapp.com/api/v1/tasks', qs.stringify(
             {
                 task:{
                     title: task.title,
@@ -118,7 +118,7 @@ const TaskList = props => {
     };
 
     const removeTask = id => {
-        axios.delete( '/api/v1/tasks/' + id,{
+        axios.delete( 'https://arcane-reaches-18869.herokuapp.com/api/v1/tasks/' + id,{
             headers:{
                 Authorization:token,
                 Content_Type:"application/json"
@@ -200,7 +200,7 @@ const TaskList = props => {
     }
     const updateTask = (updatedTask) => {
         const qs = require('qs');
-        axios.patch ( '/api/v1/tasks/' + updatedTask.id, qs.stringify (
+        axios.patch ( 'https://arcane-reaches-18869.herokuapp.com/api/v1/tasks/' + updatedTask.id, qs.stringify (
             {
                 task: {
                     title: updatedTask.title,
