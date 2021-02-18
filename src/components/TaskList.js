@@ -15,7 +15,12 @@ import Login from "./Login.js"
 import SignUp from "./SignUp";
 import NavBarAuth from "./NavBarAuth";
 const TaskList = props => {
-
+    useEffect(()=>{
+        if(props.token!==''){
+            setToken(props.token)
+            loadTasks(props.token)
+        }
+    })
     const initialFormState = {
         title:'',
         description:'',
