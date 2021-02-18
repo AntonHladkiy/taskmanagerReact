@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+.container{
+  align-content: center;
+  margin-left: auto;
+  margin-right:auto;
+}
+input[type=checkbox]
+{
+  width: 20px; height: 20px;
+}

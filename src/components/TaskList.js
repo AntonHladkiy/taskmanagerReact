@@ -243,8 +243,8 @@ const TaskList = props => {
     };
     return (
     <Router>
-        <div >
-
+        <div><NavBarAuth loggedIn={loggedIn} logOut={logOut}/></div>
+        <div className={"container"}>
             <Switch>
                 <Route path="/login">
                     <Login initialUser={initialUser} loggedIn={loggedIn} logIn={logIn} />
@@ -268,14 +268,14 @@ const TaskList = props => {
 
                        {tasks.map((task) => (
                            !task.done &&
-                           <dl className="row" key={task.id}>
-                               <dt className="col-sm-3 mb-2 mt-1">
+                           <dl className="row border border-primary border-right-0 rounded-left w-50"  key={task.id}>
+                               <dt className="col-sm-8 mb-2 mt-1">
                                    <h4>
                                        <Task task={task} removeTask={removeTask} editTask={editTask}
                                              onChangeCheckBoxHandle={onChangeCheckBoxHandle}/>
                                    </h4>
                                </dt>
-                               <dd className="col-sm-3 mb-2 mt-1">
+                               <dd className="col-sm-3 mb-2 mt-2">
                                    <button className={"btn btn-info"} onClick={() => {
                                        completeTask(task)
                                    }}>Complete
@@ -289,14 +289,14 @@ const TaskList = props => {
                         <h3>Completed tasks:</h3>
                         {tasks.map((task) => (
                             task.done &&
-                            <dl className="row" key={task.id}>
-                                <dt className="col-sm-3 mb-2 mt-1">
+                            <dl className="row border border-primary border-right-0 rounded-left w-50" key={task.id}>
+                                <dt className="col-sm-8 mb-2 mt-1">
                                     <h4>
                                         <Task task={task} removeTask={removeTask} editTask={editTask}
                                               onChangeCheckBoxHandle={onChangeCheckBoxHandle}/>
                                     </h4>
                                 </dt>
-                                <dd className="col-sm-3 mb-2 mt-1">
+                                <dd className="col-sm-4 mb-2 mt-2 ">
                                     <button className={"btn btn-info"} onClick={() => {
                                         makeActiveTask(task)
                                     }}>Make Active
@@ -326,7 +326,6 @@ const TaskList = props => {
                     {!loggedIn&&
                     <span><h3>Log in first</h3>
                     </span>}
-                    <div><NavBarAuth loggedIn={loggedIn} logOut={logOut}/></div>
                 </Route>
             </Switch>
         </div>
