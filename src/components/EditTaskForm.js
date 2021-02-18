@@ -8,7 +8,7 @@ const EditTaskForm = props => {
         setTask({ ...task, [name]: value });
     };
     if(props.currentTask.description===""){
-        return <Redirect to="/"></Redirect>
+        return <Redirect to="/" token={props.token}></Redirect>
     }
     return (
         <form className={"form-check"} autocomplete="off">

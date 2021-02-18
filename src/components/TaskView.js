@@ -5,7 +5,7 @@ import {Link , Redirect} from "react-router-dom";
 const TaskView = props => {
     const task=props.currentTask;
     if(props.currentTask.description===""){
-        return <Redirect to="/"></Redirect>
+        return <Redirect to="/" token={props.token}></Redirect>
     }
     return (
             <div>

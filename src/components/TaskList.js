@@ -259,10 +259,10 @@ const TaskList = props => {
                     <NewTaskForm addTask={addTask} initialFormState={initialFormState}/>
                 </Route>
                 <Route path="/edit">
-                    <EditTaskForm currentTask={currentTask} updateTask={updateTask}/>
+                    <EditTaskForm currentTask={currentTask} token={token} updateTask={updateTask}/>
                 </Route>
                 <Route path="/view" >
-                    <TaskView currentTask={currentTask} />
+                    <TaskView currentTask={currentTask} token={token}/>
                 </Route>
                 <Route path="/">
                     {loggedIn && <span>
