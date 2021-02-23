@@ -33,7 +33,6 @@ const TaskList = props => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [token, setToken] = useState(sessionStorage.getItem('token')||'');
     useEffect(()=>{
-        console.log(token)
         if(token){
             if(token!==''){
                 loadTasks(token)
