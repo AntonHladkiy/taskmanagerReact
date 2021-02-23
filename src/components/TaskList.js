@@ -33,11 +33,13 @@ const TaskList = props => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [token, setToken] = useState(sessionStorage.getItem('token')||'');
     useEffect(()=>{
+        console.log(token)
+        if(token){
             if(token!==''){
                 loadTasks(token)
                 setLoggedIn(true)
             }
-        },[]
+        }},[]
     )
     const loadTasks=(token)=>{
         axios.get('https://arcane-reaches-18869.herokuapp.com/api/v1/tasks.json',{
