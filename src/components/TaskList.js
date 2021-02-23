@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import NewTaskForm from "./NewTaskForm";
 import Task from "./Task";
@@ -31,8 +31,14 @@ const TaskList = props => {
     const [tasks, setTasks] = useState([]);
     const setSorted = useState(false)[1];
     const [loggedIn, setLoggedIn] = useState(false);
-    const [token, setToken] = useState('');
-
+    const [token, setToken] = useState(sessionStorage.getItem('token')||'');
+    useEffect(()=>{
+            if(token!==''){
+                loadTasks(token)
+                setLoggedIn(true)
+            }
+        },[]
+    )
     const loadTasks=(token)=>{
         axios.get('https://arcane-reaches-18869.herokuapp.com/api/v1/tasks.json',{
             headers: {
@@ -64,6 +70,7 @@ const TaskList = props => {
                     } else{
                     console.log(res.data.token)
                     setToken(res.data.token)
+                    sessionStorage.setItem('token',res.data.token)
                     setLoggedIn(true)
                     loadTasks(res.data.token)
                     }
@@ -86,6 +93,7 @@ const TaskList = props => {
     const logOut=(user)=>{
         setToken('')
         setLoggedIn(false)
+        sessionStorage.removeItem('token')
     }
 
     const addTask = task => {
