@@ -274,9 +274,6 @@ const TaskList = props => {
                                     unCheckAll()
                                 }}>Uncheck all</button>
                             </div><div>
-                            <button className="btn btn-info mt-2 ml-1 w-50" onClick={() => {
-                                sortTasks()
-                            }}>Sort all</button></div>
                         </span>
                     }
                     {!loggedIn&&
