@@ -13,9 +13,8 @@ import TaskView from "./TaskView";
 import Login from "./Login.js"
 import SignUp from "./SignUp";
 import Success from "./Success";
-import Tasks from "./Tasks"
 import NavBarAuth from "./NavBarAuth";
-const TaskList = props => {
+const TaskList = ()=> {
     const initialFormState = {
         title:'',
         description:'',
@@ -34,7 +33,7 @@ const TaskList = props => {
     const [token, setToken] = useState(sessionStorage.getItem('token')||'');
     const [completedTasks, setCompletedTasks] = useState([]);
     const [uncompletedTasks, setUncompletedTasks] = useState([]);
-    const [sorted,setSorted]=useState(-1);
+    const [,setSorted]=useState(-1);
     useEffect(()=>{
         if(token){
             if(token!==''){
@@ -109,7 +108,7 @@ const TaskList = props => {
                 }
             ).catch(error=>console.log(error))
     }
-    const logOut=(user)=>{
+    const logOut=()=>{
         setToken('')
         setLoggedIn(false)
         sessionStorage.removeItem('token')
@@ -152,7 +151,7 @@ const TaskList = props => {
                 Authorization:token,
                 Content_Type:"application/json"
             }})
-            .then(response => {
+            .then(() => {
                 setUncompletedTasks(uncompletedTasks=>uncompletedTasks.filter(task => task.id !== id))
                 setCompletedTasks(completedTasks=>completedTasks.filter(task => task.id !== id))
             })
