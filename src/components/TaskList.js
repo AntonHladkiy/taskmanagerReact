@@ -273,7 +273,7 @@ const TaskList = props => {
                                 <button className="btn btn-success mt-2 mr-2 w-25" onClick={() => {
                                     unCheckAll()
                                 }}>Uncheck all</button>
-                            </div><div>
+                            </div>
                         </span>
                     }
                     {!loggedIn&&
