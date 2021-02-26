@@ -30,7 +30,6 @@ const TaskList = props => {
         firstName:''
     };
     const [currentTask, setCurrentTask] = useState(initialFormState);
-    const [tasks, setTasks] = useState([]);
     const [loggedIn, setLoggedIn] = useState(false);
     const [token, setToken] = useState(sessionStorage.getItem('token')||'');
     const [completedTasks, setCompletedTasks] = useState([]);
@@ -51,16 +50,31 @@ const TaskList = props => {
             }})
             .then(res => {
                     //setTasks ( res.data )
-                    setTasks([]);
-                    res.data.forEach(item=>{setTasks(tasks=>[...tasks, {
-                        id:item.id,
-                        title:item.title,
-                        description:item.description,
-                        dueDate:item.dueDate,
-                        priority:item.priority,
-                        done:item.done,
-                        checked: false
-                    }])})
+                setCompletedTasks([]);
+                setUncompletedTasks([]);
+                    res.data.forEach(item=>{if(item.done) {
+                            setCompletedTasks(completedTasks=>[...completedTasks, {
+                                id:item.id,
+                                title:item.title,
+                                description:item.description,
+                                dueDate:item.dueDate,
+                                priority:item.priority,
+                                done:item.done,
+                                checked: false
+                            }])
+                        }
+                        else {
+                            setUncompletedTasks(uncompletedTasks=>[...uncompletedTasks, {
+                                id:item.id,
+                                title:item.title,
+                                description:item.description,
+                                dueDate:item.dueDate,
+                                priority:item.priority,
+                                done:item.done,
+                                checked: false
+                            }])
+                        }
+                    })
                 }
             )
     }
@@ -117,7 +131,7 @@ const TaskList = props => {
                 Authorization: token,
                 Content_Type: "application/json"
             }})
-            .then(res=>( setTasks(tasks=>[...tasks, {
+            .then(res=>( setUncompletedTasks(uncompletedTasks=>[...uncompletedTasks, {
                 id:res.data.id,
                 title: task.title,
                 description: task.description,
@@ -139,7 +153,8 @@ const TaskList = props => {
                 Content_Type:"application/json"
             }})
             .then(response => {
-                setTasks(tasks=>tasks.filter(task => task.id !== id))
+                setUncompletedTasks(uncompletedTasks=>uncompletedTasks.filter(task => task.id !== id))
+                setCompletedTasks(completedTasks=>completedTasks.filter(task => task.id !== id))
             })
             .catch(error => console.log(error))
     };
@@ -157,7 +172,16 @@ const TaskList = props => {
     };
     const onChangeCheckBoxHandle=event=>{
           if(event.target.attributes.ischecked.value ==="true"){
-              setTasks(tasks.map(task => (task.id.toString() === event.target.id ? {
+              setUncompletedTasks(uncompletedTasks.map(task => (task.id.toString() === event.target.id ? {
+                  id:task.id,
+                  title:task.title,
+                  description:task.description,
+                  dueDate:task.dueDate,
+                  priority:task.priority,
+                  done:task.done,
+                  checked: false
+              } : task)))
+              setCompletedTasks(completedTasks.map(task => (task.id.toString() === event.target.id ? {
                   id:task.id,
                   title:task.title,
                   description:task.description,
@@ -167,7 +191,16 @@ const TaskList = props => {
                   checked: false
               } : task)))
           } else{
-              setTasks(tasks.map(task => (task.id.toString() === event.target.id ? {
+              setUncompletedTasks(uncompletedTasks.map(task => (task.id.toString() === event.target.id ? {
+                  id:task.id,
+                  title:task.title,
+                  description:task.description,
+                  dueDate:task.dueDate,
+                  priority:task.priority,
+                  done:task.done,
+                  checked: true
+              } : task)))
+              setCompletedTasks(completedTasks.map(task => (task.id.toString() === event.target.id ? {
                   id:task.id,
                   title:task.title,
                   description:task.description,
@@ -179,7 +212,16 @@ const TaskList = props => {
           }
     }
     const checkAll=()=>{
-        setTasks(tasks.map(task => ({
+        setCompletedTasks(completedTasks.map(task => ({
+            id:task.id,
+            title:task.title,
+            description:task.description,
+            dueDate:task.dueDate,
+            priority:task.priority,
+            done:task.done,
+            checked: true
+        })))
+        setUncompletedTasks(uncompletedTasks.map(task => ({
             id:task.id,
             title:task.title,
             description:task.description,
@@ -190,7 +232,16 @@ const TaskList = props => {
         })))
     }
     const unCheckAll=()=>{
-        setTasks(tasks.map(task => ({
+        setCompletedTasks(completedTasks.map(task => ({
+            id:task.id,
+            title:task.title,
+            description:task.description,
+            dueDate:task.dueDate,
+            priority:task.priority,
+            done:task.done,
+            checked: false
+        })))
+        setUncompletedTasks(uncompletedTasks.map(task => ({
             id:task.id,
             title:task.title,
             description:task.description,
@@ -218,7 +269,13 @@ const TaskList = props => {
                 Content_Type: "application/json"
             }}).then ( res =>{
                  console.log(res);
-                setTasks(tasks.map(task => (task.id === updatedTask.id ? updatedTask : task)))
+                 if(updatedTask.done){
+                     setCompletedTasks(completedTasks=>[...completedTasks,updatedTask])
+                     setUncompletedTasks(uncompletedTasks=>uncompletedTasks.filter(task => task.id !== updatedTask.id))
+                 } else{
+                     setUncompletedTasks(uncompletedTasks=>[...uncompletedTasks,updatedTask])
+                     setCompletedTasks(completedTasks=>completedTasks.filter(task => task.id !== updatedTask.id))
+                 }
              })
             .catch(()=>{
                 alert("Wrong form format try again");
@@ -227,7 +284,13 @@ const TaskList = props => {
 
     };
     const batchDelete=()=>{
-        tasks.forEach(task=>{
+        completedTasks.forEach(task=>{
+                if(task.checked){
+                    removeTask(task.id)
+                }
+            }
+        )
+        uncompletedTasks.forEach(task=>{
                 if(task.checked){
                     removeTask(task.id)
                 }
@@ -235,8 +298,8 @@ const TaskList = props => {
         )
     }
     const completeTask=(task)=>{
-            task.done=true;
-            updateTask(task);
+        task.done=true;
+        updateTask(task);
     };
     const makeActiveTask=(task)=>{
         task.done=false;
@@ -310,7 +373,7 @@ const TaskList = props => {
                         <span>
                             <div className="tasksList">
                                     <h3>Tasks to do:</h3>
-                                    {tasks.map((task) => (
+                                    {uncompletedTasks.map((task) => (
                                          !task.done &&
                                          <dl className="row border border-primary border-right-0 rounded-left w-50"  key={task.id}>
                                              <dt className="col-sm-8 mb-2 mt-1">
@@ -331,7 +394,7 @@ const TaskList = props => {
 
                             <div className="tasksList">
                                 <h3>Completed tasks:</h3>
-                                {tasks.map((task) => (
+                                {completedTasks.map((task) => (
                                     task.done &&
                                     <dl className="row border border-primary border-right-0 rounded-left w-50" key={task.id}>
                                         <dt className="col-sm-8 mb-2 mt-1">
