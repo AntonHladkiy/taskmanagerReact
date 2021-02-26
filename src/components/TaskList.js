@@ -12,6 +12,8 @@ import {
 import TaskView from "./TaskView";
 import Login from "./Login.js"
 import SignUp from "./SignUp";
+import Success from "./Success";
+import Tasks from "./Tasks"
 import NavBarAuth from "./NavBarAuth";
 const TaskList = props => {
     const initialFormState = {
@@ -29,7 +31,6 @@ const TaskList = props => {
     };
     const [currentTask, setCurrentTask] = useState(initialFormState);
     const [tasks, setTasks] = useState([]);
-    const setSorted = useState(false)[1];
     const [loggedIn, setLoggedIn] = useState(false);
     const [token, setToken] = useState('');
 
@@ -187,19 +188,7 @@ const TaskList = props => {
             checked: false
         })))
     }
-    const sortTasks=()=>{
-        setTasks(tasks.sort(function(a, b) {
-            if (a.title<b.title) {
-                return -1;
-            }
-            if (a.title>b.title) {
-                return 1;
-            }
-            // a must be equal to b
-            return 0;
-        }));
-        setSorted(true)
-    }
+
     const updateTask = (updatedTask) => {
         const qs = require('qs');
         axios.patch ( 'https://arcane-reaches-18869.herokuapp.com/api/v1/tasks/' + updatedTask.id, qs.stringify (
@@ -261,71 +250,40 @@ const TaskList = props => {
                 <Route path="/view" >
                     <TaskView currentTask={currentTask}/>
                 </Route>
+                <Route path="/success" >
+                    <Success/>
+                </Route>
                 <Route path="/">
-                    {loggedIn && <span>
-                   <div className="tasksList">
-                        <h3>Tasks to do:</h3>
-
-                       {tasks.map((task) => (
-                           !task.done &&
-                           <dl className="row border border-primary border-right-0 rounded-left w-50"  key={task.id}>
-                               <dt className="col-sm-8 mb-2 mt-1">
-                                   <h4>
-                                       <Task task={task} removeTask={removeTask} editTask={editTask}
-                                             onChangeCheckBoxHandle={onChangeCheckBoxHandle}/>
-                                   </h4>
-                               </dt>
-                               <dd className="col-sm-3 mb-2 mt-2">
-                                   <button className={"btn btn-info"} onClick={() => {
-                                       completeTask(task)
-                                   }}>Complete
-                                   </button>
-                               </dd>
-                           </dl>
-                       ))}
-                    </div>
-
-                    <div className="tasksList">
-                        <h3>Completed tasks:</h3>
-                        {tasks.map((task) => (
-                            task.done &&
-                            <dl className="row border border-primary border-right-0 rounded-left w-50" key={task.id}>
-                                <dt className="col-sm-8 mb-2 mt-1">
-                                    <h4>
-                                        <Task task={task} removeTask={removeTask} editTask={editTask}
-                                              onChangeCheckBoxHandle={onChangeCheckBoxHandle}/>
-                                    </h4>
-                                </dt>
-                                <dd className="col-sm-4 mb-2 mt-2 ">
-                                    <button className={"btn btn-info"} onClick={() => {
-                                        makeActiveTask(task)
-                                    }}>Make Active
-                                    </button>
-                                </dd>
-                            </dl>
-                        ))}
-                    </div>
-                    <div>
-                        <Link to="/new"><button className={"btn btn-info mt-2 mr-2  w-25"}>Add new task</button></Link>
-                        <button className="btn btn-danger mt-2 w-25" onClick={() => {
-                            batchDelete()
-                        }}>Batch delete</button>
-                    </div>
-                    <div>
-                        <button className="btn btn-success mt-2 mr-2 w-25" onClick={() => {
-                            checkAll()
-                        }}>Check all</button>
-                        <button className="btn btn-success mt-2 mr-2 w-25" onClick={() => {
-                            unCheckAll()
-                        }}>Uncheck all</button>
-                    </div><div>
-                    <button className="btn btn-info mt-2 ml-1 w-50" onClick={() => {
-                        sortTasks()
-                    }}>Sort all</button></div>
-                    </span>}
+                    {loggedIn &&
+                        <span>
+                            <div>
+                                <Tasks tasks={tasks} removeTask={removeTask} editTask={editTask}
+                                       onChangeCheckBoxHandle={onChangeCheckBoxHandle} completeTask={completeTask} makeActiveTask={makeActiveTask}/>
+                            </div>
+                            <div>
+                                <Link to="/new"><button className={"btn btn-info mt-2 mr-2  w-25"}>Add new task</button></Link>
+                                <button className="btn btn-danger mt-2 w-25" onClick={() => {
+                                    batchDelete()
+                                }}>Batch delete</button>
+                            </div>
+                            <div>
+                                <button className="btn btn-success mt-2 mr-2 w-25" onClick={() => {
+                                    checkAll()
+                                }}>Check all</button>
+                                <button className="btn btn-success mt-2 mr-2 w-25" onClick={() => {
+                                    unCheckAll()
+                                }}>Uncheck all</button>
+                            </div><div>
+                            <button className="btn btn-info mt-2 ml-1 w-50" onClick={() => {
+                                sortTasks()
+                            }}>Sort all</button></div>
+                        </span>
+                    }
                     {!loggedIn&&
-                    <span><h3>Log in first</h3>
-                    </span>}
+                    <span>
+                        <h3>Log in first</h3>
+                    </span>
+                    }
                 </Route>
             </Switch>
         </div>
