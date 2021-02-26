@@ -33,6 +33,9 @@ const TaskList = props => {
     const [tasks, setTasks] = useState([]);
     const [loggedIn, setLoggedIn] = useState(false);
     const [token, setToken] = useState(sessionStorage.getItem('token')||'');
+    const [completedTasks, setCompletedTasks] = useState([]);
+    const [uncompletedTasks, setUncompletedTasks] = useState([]);
+    const setSorted=useState(-1)[1];
     useEffect(()=>{
         if(token){
             if(token!==''){
@@ -239,6 +242,46 @@ const TaskList = props => {
         task.done=false;
         updateTask(task);
     };
+
+    const sortTasksByTitle=(tasks,setTasks)=>{
+        setTasks(tasks.sort(function(a, b) {
+            if (a.title<b.title) {
+                return -1;
+            }
+            if (a.title>b.title) {
+                return 1;
+            }
+            // a must be equal to b
+            return 0;
+        }));
+        setSorted(0)
+    }
+    const sortTasksByDueDate=(tasks,setTasks)=>{
+        setTasks(tasks.sort(function(a, b) {
+            if (a.dueDate<b.dueDate) {
+                return -1;
+            }
+            if (a.dueDate>b.dueDate) {
+                return 1;
+            }
+            // a must be equal to b
+            return 0;
+        }));
+        setSorted(1)
+    }
+    const sortTasksPriority=(tasks,setTasks)=>{
+        setTasks(tasks.sort(function(a, b) {
+            if (a.priority<b.priority) {
+                return -1;
+            }
+            if (a.priority>b.priority) {
+                return 1;
+            }
+            // a must be equal to b
+            return 0;
+        }));
+        setSorted(2)
+    }
     return (
     <Router>
         <div><NavBarAuth loggedIn={loggedIn} logOut={logOut}/></div>
@@ -265,10 +308,48 @@ const TaskList = props => {
                 <Route path="/">
                     {loggedIn &&
                         <span>
-                            <div>
-                                <Tasks tasks={tasks} removeTask={removeTask} editTask={editTask}
-                                       onChangeCheckBoxHandle={onChangeCheckBoxHandle} completeTask={completeTask} makeActiveTask={makeActiveTask}/>
+                            <div className="tasksList">
+                                    <h3>Tasks to do:</h3>
+                                    {tasks.map((task) => (
+                                         !task.done &&
+                                         <dl className="row border border-primary border-right-0 rounded-left w-50"  key={task.id}>
+                                             <dt className="col-sm-8 mb-2 mt-1">
+                                                 <h4>
+                                                     <Task task={task} removeTask={removeTask} editTask={editTask}
+                                                           onChangeCheckBoxHandle={onChangeCheckBoxHandle}/>
+                                                 </h4>
+                                             </dt>
+                                             <dd className="col-sm-3 mb-2 mt-2">
+                                                 <button className={"btn btn-info"} onClick={() => {
+                                                     completeTask(task)
+                                                 }}>Complete
+                                                 </button>
+                                             </dd>
+                                         </dl>
+                                     ))}
                             </div>
+
+                            <div className="tasksList">
+                                <h3>Completed tasks:</h3>
+                                {tasks.map((task) => (
+                                    task.done &&
+                                    <dl className="row border border-primary border-right-0 rounded-left w-50" key={task.id}>
+                                        <dt className="col-sm-8 mb-2 mt-1">
+                                            <h4>
+                                                <Task task={task} removeTask={removeTask} editTask={editTask}
+                                                      onChangeCheckBoxHandle={onChangeCheckBoxHandle}/>
+                                            </h4>
+                                        </dt>
+                                        <dd className="col-sm-4 mb-2 mt-2 ">
+                                            <button className={"btn btn-info"} onClick={() => {
+                                                makeActiveTask(task)
+                                            }}>Make Active
+                                            </button>
+                                        </dd>
+                                    </dl>
+                                ))}
+                            </div>
+
                             <div>
                                 <Link to="/new"><button className={"btn btn-info mt-2 mr-2  w-25"}>Add new task</button></Link>
                                 <button className="btn btn-danger mt-2 w-25" onClick={() => {
