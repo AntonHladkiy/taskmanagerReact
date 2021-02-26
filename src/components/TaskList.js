@@ -34,7 +34,7 @@ const TaskList = props => {
     const [token, setToken] = useState(sessionStorage.getItem('token')||'');
     const [completedTasks, setCompletedTasks] = useState([]);
     const [uncompletedTasks, setUncompletedTasks] = useState([]);
-    const setSorted=useState(-1)[1];
+    const [sorted,setSorted]=useState(-1);
     useEffect(()=>{
         if(token){
             if(token!==''){
@@ -332,7 +332,7 @@ const TaskList = props => {
         }));
         setSorted(1)
     }
-    const sortTasksPriority=(tasks,setTasks)=>{
+    const sortTasksByPriority=(tasks,setTasks)=>{
         setTasks(tasks.sort(function(a, b) {
             if (a.priority<b.priority) {
                 return -1;
@@ -373,44 +373,52 @@ const TaskList = props => {
                         <span>
                             <div className="tasksList">
                                     <h3>Tasks to do:</h3>
+                                    <table className="table">
+                                     <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col"><button className={"btn btn-outline-dark"} onClick={()=>{sortTasksByTitle(uncompletedTasks,setUncompletedTasks)}}>Title</button></th>
+                                            <th scope="col"><button className={"btn btn-outline-dark"} onClick={()=>{sortTasksByPriority(uncompletedTasks,setUncompletedTasks)}}>Priority</button></th>
+                                            <th scope="col"><button className={"btn btn-outline-dark"} onClick={()=>{sortTasksByDueDate(uncompletedTasks,setUncompletedTasks)}}>Due Date</button></th>
+                                            <th scope="col" className={"text-white"}>Delete button</th>
+                                            <th scope="col" className={"text-white"}>Edit button</th>
+                                            <th scope="col" className={"text-white"}>#</th>
+                                        </tr>
+                                      </thead>
+                                        <tbody>
                                     {uncompletedTasks.map((task) => (
-                                         !task.done &&
-                                         <dl className="row border border-primary border-right-0 rounded-left w-50"  key={task.id}>
-                                             <dt className="col-sm-8 mb-2 mt-1">
-                                                 <h4>
-                                                     <Task task={task} removeTask={removeTask} editTask={editTask}
-                                                           onChangeCheckBoxHandle={onChangeCheckBoxHandle}/>
-                                                 </h4>
-                                             </dt>
-                                             <dd className="col-sm-3 mb-2 mt-2">
-                                                 <button className={"btn btn-info"} onClick={() => {
-                                                     completeTask(task)
-                                                 }}>Complete
-                                                 </button>
-                                             </dd>
-                                         </dl>
-                                     ))}
+                                             <Task key={task.id} task={task} removeTask={removeTask} editTask={editTask}
+                                                   onChangeCheckBoxHandle={onChangeCheckBoxHandle} changeTask={completeTask}
+                                                   buttonName={"Complete"}
+                                             />
+                                    ))}
+                                        </tbody>
+                                    </table>
                             </div>
 
                             <div className="tasksList">
                                 <h3>Completed tasks:</h3>
-                                {completedTasks.map((task) => (
-                                    task.done &&
-                                    <dl className="row border border-primary border-right-0 rounded-left w-50" key={task.id}>
-                                        <dt className="col-sm-8 mb-2 mt-1">
-                                            <h4>
-                                                <Task task={task} removeTask={removeTask} editTask={editTask}
-                                                      onChangeCheckBoxHandle={onChangeCheckBoxHandle}/>
-                                            </h4>
-                                        </dt>
-                                        <dd className="col-sm-4 mb-2 mt-2 ">
-                                            <button className={"btn btn-info"} onClick={() => {
-                                                makeActiveTask(task)
-                                            }}>Make Active
-                                            </button>
-                                        </dd>
-                                    </dl>
-                                ))}
+                                <table className="table">
+                                     <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col"><button className={"btn btn-outline-dark"} onClick={()=>{sortTasksByTitle(completedTasks,setCompletedTasks)}}>Title</button></th>
+                                            <th scope="col"><button className={"btn btn-outline-dark"} onClick={()=>{sortTasksByPriority(completedTasks,setCompletedTasks)}}>Priority</button></th>
+                                            <th scope="col"><button className={"btn btn-outline-dark"} onClick={()=>{sortTasksByDueDate(completedTasks,setCompletedTasks)}}>Due Date</button></th>
+                                            <th scope="col" className={"text-white"}>Delete button</th>
+                                            <th scope="col" className={"text-white"}>Edit button</th>
+                                            <th scope="col" className={"text-white"}>#</th>
+                                        </tr>
+                                      </thead>
+                                        <tbody>
+                                    {completedTasks.map((task) => (
+                                        <Task key={task.id} task={task} removeTask={removeTask} editTask={editTask}
+                                              onChangeCheckBoxHandle={onChangeCheckBoxHandle} changeTask={makeActiveTask}
+                                              buttonName={"Make active"}
+                                        />
+                                    ))}
+                                        </tbody>
+                                    </table>
                             </div>
 
                             <div>
