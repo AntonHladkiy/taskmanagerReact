@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import { Alert } from '@material-ui/lab'
 import NewTaskForm from "./NewTaskForm";
 import Task from "./Task";
 import EditTaskForm from "./EditTaskForm";
@@ -12,8 +13,8 @@ import {
 import TaskView from "./TaskView";
 import Login from "./Login.js"
 import SignUp from "./SignUp";
-import Success from "./Success";
 import NavBarAuth from "./NavBarAuth";
+import {Collapse} from "@material-ui/core";
 const TaskList = ()=> {
     const initialFormState = {
         title:'',
@@ -25,6 +26,7 @@ const TaskList = ()=> {
     const initialUser = {
         email:'',
         password:'',
+        passwordConfirmation:'',
         lastName:'',
         firstName:''
     };
@@ -34,6 +36,7 @@ const TaskList = ()=> {
     const [completedTasks, setCompletedTasks] = useState([]);
     const [uncompletedTasks, setUncompletedTasks] = useState([]);
     const [,setSorted]=useState(-1);
+    const [open, setOpen] = React.useState(true);
     useEffect(()=>{
         if(token){
             if(token!==''){
@@ -364,8 +367,12 @@ const TaskList = ()=> {
                 <Route path="/view" >
                     <TaskView currentTask={currentTask}/>
                 </Route>
-                <Route path="/success" >
-                    <Success/>
+                <Route exact path="/success" >
+                    <div>
+                        <Collapse in={open}>
+                            <Alert onClose={() => {setOpen(false)}}>This is a success alert — check it out!</Alert>
+                        </Collapse>
+                    </div>
                 </Route>
                 <Route path="/">
                     {loggedIn &&

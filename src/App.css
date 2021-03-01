@@ -45,3 +45,16 @@ input[type=checkbox]
 {
   width: 20px; height: 20px;
 }
+
+table { border-collapse: collapse; empty-cells: show; }
+
+td { position: relative; }
+
+td.strikeout:before {
+  content: " ";
+  position: absolute;
+  top: 40%;
+  left: 0;
+  border-bottom: 1px solid #111;
+  width: 100%;
+}

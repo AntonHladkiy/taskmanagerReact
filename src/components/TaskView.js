@@ -19,9 +19,9 @@ const TaskView = props => {
                 <dd className="col-sm-9">{task.dueDate}</dd>
                 <dt className="col-sm-3">Completed:</dt>
                 { task.done &&
-                <dd className="col-sm-9"><input type="checkbox" checked disabled></input></dd> }
+                <dd className="col-sm-9"><input type="checkbox" checked disabled/></dd> }
                 { ! task.done &&
-                <dd className="col-sm-9"><input type="checkbox" disabled></input></dd>
+                <dd className="col-sm-9"><input type="checkbox" disabled/></dd>
                 }
             </dl>
             <Link to="/"><button className={"btn btn-danger mt-2 w-25"}>Back</button></Link>
