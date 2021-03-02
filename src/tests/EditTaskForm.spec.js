@@ -9,11 +9,11 @@ const currentTask = {
     done:true
 };
 let wrapped = shallow(<EditTaskForm currentTask={currentTask}></EditTaskForm>);
-describe('TaskView', () => {
-    it('should render the TaskView Component correctly', () => {
+describe('EditTaskForm', () => {
+    it('should render the EditTaskForm Component correctly', () => {
         expect(wrapped).toMatchSnapshot();
     });
-    it('renders the TaskView children', () => {
+    it('renders the EditTaskForm children', () => {
         expect(wrapped.find({ name: 'title' }).length).toEqual(1)
         expect(wrapped.find({ name: 'dueDate' }).length).toEqual(1)
         expect(wrapped.find({ name: 'description' }).length).toEqual(1)

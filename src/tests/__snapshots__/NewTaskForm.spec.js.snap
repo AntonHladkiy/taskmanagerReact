@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditTaskForm should render the EditTaskForm Component correctly 1`] = `
+exports[`NewTaskForm should render the TaskView Component correctly 1`] = `
 <form
   autoComplete="off"
   className="form-check"
@@ -15,7 +15,7 @@ exports[`EditTaskForm should render the EditTaskForm Component correctly 1`] = `
     name="title"
     onChange={[Function]}
     type="text"
-    value="title"
+    value=""
   />
   <label
     className="form-check-label"
@@ -27,7 +27,6 @@ exports[`EditTaskForm should render the EditTaskForm Component correctly 1`] = `
     name="description"
     onChange={[Function]}
     type="text"
-    value="desc"
   />
   <label
     className="form-check-label"
@@ -39,7 +38,7 @@ exports[`EditTaskForm should render the EditTaskForm Component correctly 1`] = `
     name="priority"
     onChange={[Function]}
     type="number"
-    value={1}
+    value=""
   />
   <label
     className="form-check-label"
@@ -56,11 +55,12 @@ exports[`EditTaskForm should render the EditTaskForm Component correctly 1`] = `
   <Link
     to="/"
   >
+     
     <button
       className="btn btn-success mt-2 mr-2"
       onClick={[Function]}
     >
-      Update Task
+      Create Task
     </button>
   </Link>
   <Link
