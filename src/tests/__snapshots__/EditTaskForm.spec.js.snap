@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskView should render the TaskView Component correctly 1`] = `
+<form
+  autoComplete="off"
+  className="form-check"
+>
+  <label
+    className="form-check-label"
+  >
+    Title
+  </label>
+  <input
+    className="form-control w-50"
+    name="title"
+    onChange={[Function]}
+    type="text"
+    value="title"
+  />
+  <label
+    className="form-check-label"
+  >
+    Description
+  </label>
+  <input
+    className="form-control w-50"
+    name="description"
+    onChange={[Function]}
+    type="text"
+    value="desc"
+  />
+  <label
+    className="form-check-label"
+  >
+    Priority
+  </label>
+  <input
+    className="form-control w-50"
+    name="priority"
+    onChange={[Function]}
+    type="number"
+    value={1}
+  />
+  <label
+    className="form-check-label"
+  >
+    Due Date
+  </label>
+  <input
+    className="form-control w-50"
+    name="dueDate"
+    onChange={[Function]}
+    type="date"
+    value=""
+  />
+  <Link
+    to="/"
+  >
+    <button
+      className="btn btn-success mt-2 mr-2"
+      onClick={[Function]}
+    >
+      Update Task
+    </button>
+  </Link>
+  <Link
+    to="/"
+  >
+    <button
+      className="btn btn-danger mt-2"
+    >
+      Cancel
+    </button>
+  </Link>
+</form>
+`;
