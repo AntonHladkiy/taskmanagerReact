@@ -103,7 +103,7 @@ exports[`TaskList should render the TaskList Component correctly 1`] = `
             <WithStyles(ForwardRef(Alert))
               onClose={[Function]}
             >
-              This is a success alert — check it out!
+              You have successfully confirmed your email and can log in now!
             </WithStyles(ForwardRef(Alert))>
           </WithStyles(ForwardRef(Collapse))>
         </div>
