@@ -8,8 +8,16 @@ const currentTask = {
     priority:1,
     done:true
 };
-let wrapped = shallow(<EditTaskForm currentTask={currentTask}></EditTaskForm>);
+const emptyTask = {
+    title:'',
+    description:'',
+    dueDate:'',
+    priority:'',
+    done:''
+};
+
 describe('EditTaskForm', () => {
+    let wrapped = shallow(<EditTaskForm currentTask={currentTask}></EditTaskForm>);
     it('should render the EditTaskForm Component correctly', () => {
         expect(wrapped).toMatchSnapshot();
     });
@@ -19,4 +27,11 @@ describe('EditTaskForm', () => {
         expect(wrapped.find({ name: 'description' }).length).toEqual(1)
         expect(wrapped.find({ name: 'priority' }).length).toEqual(1)
     });
+});
+describe('EditTaskForm with empty task', () => {
+    let wrapped = shallow(<EditTaskForm currentTask={emptyTask}></EditTaskForm>);
+    it('should render the EditTaskForm Component correctly', () => {
+        expect(wrapped).toMatchSnapshot();
+    });
+
 });

@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login should render the Login Component correctly 1`] = `
+<form
+  autoComplete="off"
+  className="form-check"
+>
+  <label
+    className="form-check-label"
+  >
+    Email
+  </label>
+  <input
+    className="form-control w-50"
+    name="email"
+    onChange={[Function]}
+    type="text"
+    value=""
+  />
+  <label
+    className="form-check-label"
+  >
+    Password
+  </label>
+  <input
+    className="form-control w-50"
+    name="password"
+    onChange={[Function]}
+    type="password"
+    value=""
+  />
+  <Link
+    to="/"
+  >
+     
+    <button
+      className="btn btn-success mt-2 mr-2 w-25"
+      onClick={[Function]}
+    >
+      Log In
+    </button>
+  </Link>
+  <Link
+    to="/"
+  >
+    <button
+      className="btn btn-danger mt-2 w-25"
+    >
+      Cancel
+    </button>
+  </Link>
+</form>
+`;
+
+exports[`Login when already loggenIn should render the Login Component correctly 1`] = `
+<Redirect
+  to="/"
+/>
+`;

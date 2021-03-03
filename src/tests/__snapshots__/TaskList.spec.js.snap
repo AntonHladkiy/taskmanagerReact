@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskList should render the TaskList Component correctly 1`] = `
+<BrowserRouter>
+  <div>
+    <NavBarAuth
+      logOut={[Function]}
+      loggedIn={false}
+    />
+  </div>
+  <div
+    className="ml-5"
+  >
+    <Switch>
+      <Route
+        path="/login"
+      >
+        <Login
+          initialUser={
+            Object {
+              "email": "",
+              "firstName": "",
+              "lastName": "",
+              "password": "",
+              "passwordConfirmation": "",
+            }
+          }
+          logIn={[Function]}
+          loggedIn={false}
+        />
+      </Route>
+      <Route
+        path="/signup"
+      >
+        <SignUp
+          initialUser={
+            Object {
+              "email": "",
+              "firstName": "",
+              "lastName": "",
+              "password": "",
+              "passwordConfirmation": "",
+            }
+          }
+          signUp={[Function]}
+        />
+      </Route>
+      <Route
+        path="/new"
+      >
+        <NewTaskForm
+          addTask={[Function]}
+          initialFormState={
+            Object {
+              "description": "",
+              "done": "",
+              "dueDate": "",
+              "priority": 0,
+              "title": "",
+            }
+          }
+        />
+      </Route>
+      <Route
+        path="/edit"
+      >
+        <EditTaskForm
+          currentTask={
+            Object {
+              "description": "",
+              "done": "",
+              "dueDate": "",
+              "priority": 0,
+              "title": "",
+            }
+          }
+          updateTask={[Function]}
+        />
+      </Route>
+      <Route
+        path="/view"
+      >
+        <TaskView
+          currentTask={
+            Object {
+              "description": "",
+              "done": "",
+              "dueDate": "",
+              "priority": 0,
+              "title": "",
+            }
+          }
+        />
+      </Route>
+      <Route
+        exact={true}
+        path="/success"
+      >
+        <div>
+          <WithStyles(ForwardRef(Collapse))
+            in={true}
+          >
+            <WithStyles(ForwardRef(Alert))
+              onClose={[Function]}
+            >
+              This is a success alert — check it out!
+            </WithStyles(ForwardRef(Alert))>
+          </WithStyles(ForwardRef(Collapse))>
+        </div>
+      </Route>
+      <Route
+        path="/"
+      >
+        <span>
+          <h3>
+            Log in first
+          </h3>
+        </span>
+      </Route>
+    </Switch>
+  </div>
+</BrowserRouter>
+`;

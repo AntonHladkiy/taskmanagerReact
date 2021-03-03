@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Task completed should render the Task Component correctly 1`] = `
+<tr
+  className="task hover "
+  id={0}
+  key="0"
+>
+  <td>
+    <input
+      checked={true}
+      className="mr-3  mb-3"
+      id={0}
+      ischecked="true"
+      type="checkbox"
+    />
+  </td>
+  <td
+    className="strikeout"
+  >
+    <Link
+      className="text-dark  mr-3 mb-3"
+      id={0}
+      onClick={[Function]}
+      to="/view"
+    >
+      123
+    </Link>
+  </td>
+  <td
+    className="strikeout"
+  >
+    123
+  </td>
+  <td
+    className="strikeout"
+  >
+    132
+  </td>
+  <td>
+    <Link
+      className="d-none"
+      id="task_0"
+      to="/edit"
+    >
+      <button
+        className="btn btn-danger mr-3   d-none"
+        id="task_0"
+        onClick={[Function]}
+      >
+        Edit
+      </button>
+    </Link>
+  </td>
+  <td>
+    <button
+      className="btn btn-warning  d-none"
+      id="task_0"
+      onClick={[Function]}
+    >
+      Remove
+    </button>
+  </td>
+  <td>
+    <button
+      className="btn btn-info"
+      onClick={[Function]}
+    />
+  </td>
+</tr>
+`;
+
+exports[`Task not completed should render the Task Component correctly 1`] = `
+<tr
+  className="task hover "
+  id={0}
+  key="0"
+>
+  <td>
+    <input
+      checked={true}
+      className="mr-3  mb-3"
+      id={0}
+      ischecked="true"
+      type="checkbox"
+    />
+  </td>
+  <td>
+    <Link
+      className="text-dark  mr-3 mb-3"
+      id={0}
+      onClick={[Function]}
+      to="/view"
+    >
+      123
+    </Link>
+  </td>
+  <td>
+    123
+  </td>
+  <td>
+    132
+  </td>
+  <td>
+    <Link
+      className="d-none"
+      id="task_0"
+      to="/edit"
+    >
+      <button
+        className="btn btn-danger mr-3   d-none"
+        id="task_0"
+        onClick={[Function]}
+      >
+        Edit
+      </button>
+    </Link>
+  </td>
+  <td>
+    <button
+      className="btn btn-warning  d-none"
+      id="task_0"
+      onClick={[Function]}
+    >
+      Remove
+    </button>
+  </td>
+  <td>
+    <button
+      className="btn btn-info"
+      onClick={[Function]}
+    />
+  </td>
+</tr>
+`;

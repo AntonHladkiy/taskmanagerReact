@@ -1,6 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TaskView should render the TaskView Component correctly 1`] = `
+exports[`TaskView  with not completed task should render the TaskView Component correctly 1`] = `
+<div>
+  <h3>
+    title
+  </h3>
+  <dl
+    className="row"
+  >
+    <dt
+      className="col-sm-3"
+    >
+      Description:
+    </dt>
+    <dd
+      className="col-sm-9"
+    >
+      desc
+    </dd>
+    <dt
+      className="col-sm-3"
+    >
+      Priority:
+    </dt>
+    <dd
+      className="col-sm-9"
+    >
+      1
+    </dd>
+    <dt
+      className="col-sm-3"
+    >
+      Due date:
+    </dt>
+    <dd
+      className="col-sm-9"
+    />
+    <dt
+      className="col-sm-3"
+    >
+      Completed:
+    </dt>
+    <dd
+      className="col-sm-9"
+    >
+      <input
+        disabled={true}
+        type="checkbox"
+      />
+    </dd>
+  </dl>
+  <Link
+    to="/"
+  >
+    <button
+      className="btn btn-danger mt-2 w-25"
+    >
+      Back
+    </button>
+  </Link>
+</div>
+`;
+
+exports[`TaskView with completed task should render the TaskView Component correctly 1`] = `
 <div>
   <h3>
     title
@@ -61,4 +123,10 @@ exports[`TaskView should render the TaskView Component correctly 1`] = `
     </button>
   </Link>
 </div>
+`;
+
+exports[`TaskView with empty task should render the TaskView Component correctly 1`] = `
+<Redirect
+  to="/"
+/>
 `;
