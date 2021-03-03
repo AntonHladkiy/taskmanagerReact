@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/AntonHladkiy/taskmanagerReact.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+[![CircleCI](https://circleci.com/gh/AntonHladkiy/taskmanagerReact.svg?style=svg)](https://circleci.com/gh/AntonHladkiy/taskmanagerReact)
 
 # Getting Started with Create React App 
 
