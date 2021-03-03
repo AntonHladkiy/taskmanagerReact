@@ -18,7 +18,7 @@ const SignUp = props => {
             <input className= "form-control w-50" type="text" name="lastName" value={user.lastName} onChange={handleInputChange} ></input>
             <label className= "form-check-label">Password</label>
             <input className= "form-control w-50" name="password" type="password" value={user.password} onChange={handleInputChange} ></input>
-            <label className= "form-check-label">Password</label>
+            <label className= "form-check-label">Password confirmation</label>
             <input className= "form-control w-50" type="password" name="passwordConfirmation" value={user.passwordConfirmation} onChange={handleInputChange} ></input>
             <Link to ="/login"> <button className="btn btn-success mt-2 mr-2 w-25" onClick={()=> {
                 if (!user.email|| !user.password|| !user.passwordConfirmation|| !user.lastName|| !user.firstName|| (user.passwordConfirmation!==user.password)) {
