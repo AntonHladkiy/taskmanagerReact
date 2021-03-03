@@ -370,7 +370,7 @@ const TaskList = ()=> {
                 <Route exact path="/success" >
                     <div>
                         <Collapse in={open}>
-                            <Alert onClose={() => {setOpen(false)}}>This is a success alert — check it out!</Alert>
+                            <Alert onClose={() => {setOpen(false)}}>You have successfully confirmed your email and can log in now!</Alert>
                         </Collapse>
                     </div>
                 </Route>
